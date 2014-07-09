@@ -1,0 +1,677 @@
+-- phpMyAdmin SQL Dump
+-- version 3.1.2deb1ubuntu0.2
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Dec 09, 2010 at 09:02 AM
+-- Server version: 5.0.75
+-- PHP Version: 5.2.6-3ubuntu4.6
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `dbstaffload`
+--
+create database dbstaff_ld;
+use dbstaff_ld;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblAcademicUnit`
+--
+
+CREATE TABLE IF NOT EXISTS `tblAcademicUnit` (
+  `id` varchar(5) NOT NULL,
+  `faculty_id` varchar(5) default NULL,
+  `academic_unit_name` varchar(100) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `faculty_id` (`faculty_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblAcademicUnit`
+--
+
+INSERT INTO `tblAcademicUnit` (`id`, `faculty_id`, `academic_unit_name`) VALUES
+('001', '01', 'Geography & Environmental Studies'),
+('002', '01', 'History'),
+('003', '01', 'Political Science and International Relations '),
+('004', '01', 'Sociology'),
+('005', '01', 'Social Anthropology'),
+('006', '01', 'Archaeology & Heritage Management'),
+('007', '01', 'Philosophy');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblAdmin`
+--
+
+CREATE TABLE IF NOT EXISTS `tblAdmin` (
+  `id` int(11) NOT NULL auto_increment,
+  `firstName` varchar(30) default NULL,
+  `lastName` varchar(30) default NULL,
+  `email` varchar(60) NOT NULL,
+  `userName` varchar(35) default NULL,
+  `pass_word` varchar(100) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tblAdmin`
+--
+
+INSERT INTO `tblAdmin` (`id`, `firstName`, `lastName`, `email`, `userName`, `pass_word`) VALUES
+(1, 'Mahder', 'Alemayehu', 'mahdera@yahoo.com', 'mahder', '045936084d160d9a7f4c1505ac398c37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblAdminPosition`
+--
+
+CREATE TABLE IF NOT EXISTS `tblAdminPosition` (
+  `id` int(11) NOT NULL auto_increment,
+  `admin_position_name` varchar(100) default NULL,
+  `equivalent_credit` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `tblAdminPosition`
+--
+
+INSERT INTO `tblAdminPosition` (`id`, `admin_position_name`, `equivalent_credit`) VALUES
+(8, 'Assistant Dean', 6),
+(7, 'Chair', 6),
+(6, 'Dean / Director', 6),
+(9, 'Program Coordinator', 3),
+(10, 'Course Coordinator', 3),
+(12, 'None', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblCampus`
+--
+
+CREATE TABLE IF NOT EXISTS `tblCampus` (
+  `id` varchar(5) NOT NULL,
+  `campus_name` varchar(100) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblCampus`
+--
+
+INSERT INTO `tblCampus` (`id`, `campus_name`) VALUES
+('01', 'Main Campus');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblCourse`
+--
+
+CREATE TABLE IF NOT EXISTS `tblCourse` (
+  `course_number` varchar(100) NOT NULL default '',
+  `course_title` varchar(255) default NULL,
+  `credit_hour` int(11) default NULL,
+  `lecture_hour` int(11) default '0',
+  `lab_hour` int(11) default '0',
+  `tutorial_hour` int(11) default '0',
+  `category` varchar(15) default NULL,
+  `academic_unit_id` varchar(5) default NULL,
+  `total_number_of_students` int(11) NOT NULL,
+  PRIMARY KEY  (`course_number`),
+  KEY `academic_unit_id` (`academic_unit_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblCourse`
+--
+
+INSERT INTO `tblCourse` (`course_number`, `course_title`, `credit_hour`, `lecture_hour`, `lab_hour`, `tutorial_hour`, `category`, `academic_unit_id`, `total_number_of_students`) VALUES
+('GeES 251', 'Maths for Geographers', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 261', 'Social & Cultural Geography', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 271', 'Geomorphology', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 281', 'Fundamentals of Climatalogy', 3, 3, 0, 0, 'UG', '001', 0),
+('HIST 321', 'Africa and the Colonial Experience c. 1850-c. 1945', 3, 3, 0, 0, 'UG', '002', 0),
+('GeES 341', 'Geography of Transport & Development', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 321', 'Environmental Hydrology', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 371', 'Soil Geography', 3, 3, 0, 0, 'UG', '001', 0),
+('GeEs 361', 'Surveying & Map Reading', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 351', 'Geographic Information System I', 3, 3, 0, 0, 'UG', '001', 0),
+('GeED 201', 'Civics & Ethical Education', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 421', 'Gender Geography ', 2, 2, 0, 0, 'UG', '001', 0),
+('GeES 441', 'Seminar on Africa & the Middle East', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 451', 'Agroecology & Farming System', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 461', 'Digital Image Processing', 2, 2, 0, 0, 'UG', '001', 0),
+('GeES 471', 'Fundamental of Regional Planning', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 481', 'Terrain Analysis & Land Use Planning', 3, 3, 0, 0, 'UG', '001', 0),
+('HIST 311', 'Survey of European History c. 1850-1945', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 201', 'Ethiopia and the Horn to 1500', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 211', 'The Ancient World', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 221', 'The Early History of Africa to 1500', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 251', 'Intro. To History and Historiography', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 301', 'Ethiopia and the Horn 1800-1900', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 331', 'Ethiopia and Its Neighbors 1820 to the Present', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 341', 'History of the Middle East since the 1820s', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 351', 'Introduction to Ethiopian Arts', 2, 2, 0, 0, 'UG', '002', 0),
+('HIST 361', 'Introduction to the Archaeology of Ethiopia and the Horn', 2, 2, 0, 0, 'UG', '002', 0),
+('HIST 401', 'Economic History of Ethiopia and the Horn since 1900', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 411', 'Survey of Asian History 1850-1945', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 421', 'Continuity and Change in Contemporary Africa, 1975 to the Present', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 431', 'History of Ethiopian Women', 2, 2, 0, 0, 'UG', '002', 0),
+('HIST 441', 'Diasporas of Africa in History', 2, 2, 0, 0, 'UG', '002', 0),
+('HIST 451', 'Historical Research and Writing Practice I', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 461', 'History of the Nile Basin', 2, 3, 0, 0, 'UG', '002', 0),
+('PSIR 201', 'Political Thought I', 3, 3, 0, 0, 'UG', '003', 0),
+('PSIR 211', 'Introduction to Politics and Government', 3, 3, 0, 0, 'UG', '003', 0),
+('PSIR 301', 'Governance and Human Rights ', 3, 3, 0, 0, 'UG', '003', 0),
+('PSIR 311', 'Theories of State & Society', 3, 3, 0, 0, 'UG', '003', 0),
+('PSIR 321', 'Research Methods in Political Science ', 3, 3, 0, 0, 'UG', '003', 0),
+('PSIR 331', 'The Politics of Identity and Gender ', 3, 3, 0, 0, 'UG', '003', 0),
+('PSIR 341', 'Politics and Government in Africa', 3, 3, 0, 0, 'UG', '003', 0),
+('PSIR 351', 'Politics in the Horn of Africa', 3, 3, 0, 0, 'UG', '003', 0),
+('PSIR 401', 'BA Thesis I', 3, 3, 0, 0, 'UG', '003', 0),
+('PSIR 411', 'Geopolitics', 3, 3, 0, 0, 'UG', '003', 0),
+('PSIR 421', 'International to Comparative Politics  ', 3, 3, 0, 0, 'UG', '003', 0),
+('PSIR 431', 'Democracy & Media Politics', 3, 3, 0, 0, 'UG', '003', 0),
+('PSIR 441', 'Foreign Policy and Diplomacy', 3, 3, 0, 0, 'UG', '003', 0),
+('PSIR 451', 'Political Dynamics of Development in Ethiopia', 3, 3, 0, 0, 'UG', '003', 0),
+('SOCI 201', 'Introduction to Sociology', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 211', 'Social Institution I', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 221', 'Methods of Social Research I', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 311', 'Sociological Theories I Classical Perspectives', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 321', 'Sociology of Development', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 331', 'Medical Sociology', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 341', 'Population Movements: Migration & Resettlement', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 351', 'Sociology of Tourism', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 411', 'Social Policy , Planning  & Project Administration I', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 421', 'Sociology of Deviance', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 431', 'Economic Sociology', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 441', 'Social Identities: Class, Ethnicity and Nationalism', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 451', 'Environmental Sociology', 4, 4, 0, 0, 'UG', '004', 0),
+('SANT 461', 'Contemporary Social Issues: Food Security, Poverty & Inequality', 3, 3, 0, 0, 'UG', '005', 0),
+('SOAN 201', 'Introduction to Social Anthropology', 3, 3, 0, 0, 'UG', '005', 0),
+('SOAN 211', 'Research Methods in Social Anthropology I', 3, 3, 0, 0, 'UG', '005', 0),
+('SOAN 221 ', 'Introduction to Human and Cultural Evolution', 3, 3, 0, 0, 'UG', '005', 0),
+('SOAN 311', 'Anthropological Theories II', 3, 3, 0, 0, 'UG', '005', 0),
+('SOAN 321', 'Ethnography of Ethiopia', 3, 3, 0, 0, 'UG', '005', 0),
+('SOAN 331', 'Introduction to Anthropological Linguistics', 3, 3, 0, 0, 'UG', '005', 0),
+('SOAN 411', 'Gender, Culture and Power', 3, 3, 0, 0, 'UG', '005', 0),
+('SOAN 421', 'Ethnicity, Identity and Nationalism', 3, 3, 0, 0, 'UG', '005', 0),
+('SOAN 441', 'Visual Anthropology', 3, 3, 0, 0, 'UG', '005', 0),
+('SOAN 451', 'Ecological Anthropology', 3, 3, 0, 0, 'UG', '005', 0),
+('SOAN 461', 'Senior Essay I: Research Design & Proposal', 3, 3, 0, 0, 'UG', '005', 0),
+('ArcHm 201', 'Introduction to physical Anthropology', 3, 3, 0, 0, 'UG', '006', 0),
+('ArcHm 241', 'Introduction to Archaeology', 3, 3, 0, 0, 'UG', '005', 0),
+('ArcHm 311', 'Tourism and Development in Ethiopia', 3, 3, 0, 0, 'UG', '006', 0),
+('ArcHm 321', 'Introduction to Museum Studies', 3, 3, 0, 0, 'UG', '006', 0),
+('ArcHm 341', 'Historical Archaeology of Ethiopia and the Horn I', 3, 3, 0, 0, 'UG', '006', 0),
+('Phil 203', 'Introduction to Philosophy', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 211', 'Pre-Socratics to', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 201', 'Introduction to Logic', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 301', 'Aristotle', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 311', 'Gender Issues and Philosophy', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 321', 'Introduction to African Philosophy', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 331', 'Moral Philosophy I', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 351', 'Philosophy of Education', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 361', 'Political Philosophy II', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 401', 'Empiricism', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 411', 'Philosophy of Science', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 421', 'Philosophical classics I', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 441', 'Senior Essay I', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 451', 'Development & Ethics', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 461', '19th Century Critics of Metaphysics', 3, 3, 0, 0, 'UG', '007', 0),
+('GeES 601', 'Thoughts and Philosophy in Geography', 3, 3, 0, 0, 'PG', '001', 0),
+('GeES 602', 'Fundamentals of GIS & RS', 5, 5, 0, 0, 'PG', '001', 0),
+('GeES 611', 'Spatial Development theories', 3, 3, 0, 0, 'PG', '001', 0),
+('GeES 613', 'The Urban and Regional Economy', 3, 3, 0, 0, 'PG', '001', 0),
+('HIST 803', 'Advanced Historical Seminar II', 4, 4, 0, 0, 'PG', '002', 0),
+('HIST 611', 'Seminar on Historiography and Advanced Methodology', 4, 4, 0, 0, 'PG', '002', 0),
+('HIST 621', 'Sources, Methods and Themes in African History', 4, 4, 0, 0, 'PG', '002', 0),
+('HIST 631', 'Issues in the Historiography of Ethiopia and the Horn', 4, 4, 0, 0, 'PG', '002', 0),
+('PSIR 611', 'Theories of International Relations (General)', 3, 3, 0, 0, 'PG', '003', 0),
+('PSIR 621', 'Research Methodology (methods)', 3, 3, 0, 0, 'PG', '003', 0),
+('PSIR 631', 'Seminar on Ethiopiaâ€™s Foreign Relations and the Horn of Africa (General)', 3, 3, 0, 0, 'PG', '003', 0),
+('PSIR 641', 'International Law and Organizations (General ', 3, 3, 0, 0, 'PG', '003', 0),
+('PSIR 652', 'MA Thesis', 3, 3, 0, 0, 'PG', '003', 0),
+('PSIR 802', 'Seminar on Comparative Politics', 3, 3, 0, 0, 'PG', '003', 0),
+('PSIR 831', 'Seminar on Modern Political Theory', 3, 3, 0, 0, 'PG', '003', 0),
+('PSIR 852', 'Seminar on Comparative Foreign Policy', 3, 3, 0, 0, 'PG', '003', 0),
+('SOAN 611', 'Theories of Social Anthropology ', 5, 5, 0, 0, 'PG', '005', 0),
+('SOAN 621', 'Research Methods in Social Anthropology', 3, 3, 0, 0, 'PG', '005', 0),
+('SOAN 631', 'Ethnographic Analysis', 3, 3, 0, 0, 'PG', '005', 0),
+('SOAN 632 ', 'Anthropology of Religion', 3, 3, 0, 0, 'PG', '005', 0),
+('SOAN  642', 'Development Anthropology', 3, 3, 0, 0, 'PG', '005', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblCourseCategory`
+--
+
+CREATE TABLE IF NOT EXISTS `tblCourseCategory` (
+  `id` int(11) NOT NULL auto_increment,
+  `course_category_name` varchar(30) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `tblCourseCategory`
+--
+
+INSERT INTO `tblCourseCategory` (`id`, `course_category_name`) VALUES
+(3, 'PG'),
+(2, 'UG'),
+(4, 'PhD');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblCourseDelivery`
+--
+
+CREATE TABLE IF NOT EXISTS `tblCourseDelivery` (
+  `id` int(11) NOT NULL auto_increment,
+  `course_delivery_name` varchar(100) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Dumping data for table `tblCourseDelivery`
+--
+
+INSERT INTO `tblCourseDelivery` (`id`, `course_delivery_name`) VALUES
+(13, 'Tutorial'),
+(8, 'Lecture'),
+(10, 'Thesis'),
+(11, 'Project Advising'),
+(12, 'Lab');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblCourseOfferings`
+--
+
+CREATE TABLE IF NOT EXISTS `tblCourseOfferings` (
+  `course_number` varchar(100) NOT NULL default '',
+  `course_title` varchar(255) default NULL,
+  `credit_hour` int(11) default NULL,
+  `lecture_hour` int(11) default '0',
+  `lab_hour` int(11) default '0',
+  `tutorial_hour` int(11) default '0',
+  `category` varchar(15) default NULL,
+  `academic_unit_id` varchar(5) default NULL,
+  `total_number_of_students` int(11) default NULL,
+  PRIMARY KEY  (`course_number`),
+  KEY `academic_unit_id` (`academic_unit_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblCourseOfferings`
+--
+
+INSERT INTO `tblCourseOfferings` (`course_number`, `course_title`, `credit_hour`, `lecture_hour`, `lab_hour`, `tutorial_hour`, `category`, `academic_unit_id`, `total_number_of_students`) VALUES
+('GeES 251', 'Maths for Geographers', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 261', 'Social & Cultural Geography', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 271', 'Geomorphology', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 281', 'Fundamentals of Climatalogy', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 341', 'Geography of Transport & Development', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 321', 'Environmental Hydrology', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 371', 'Soil Geography', 3, 3, 0, 0, 'UG', '001', 0),
+('GeEs 361', 'Surveying & Map Reading', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 351', 'Geographic Information System I', 3, 3, 0, 0, 'UG', '001', 0),
+('GeED 201', 'Civics & Ethical Education', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 421', 'Gender Geography ', 2, 2, 0, 0, 'UG', '001', 0),
+('GeES 441', 'Seminar on Africa & the Middle East', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 451', 'Agroecology & Farming System', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 461', 'Digital Image Processing', 2, 2, 0, 0, 'UG', '001', 0),
+('GeES 471', 'Fundamental of Regional Planning', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 481', 'Terrain Analysis & Land Use Planning', 3, 3, 0, 0, 'UG', '001', 0),
+('GeES 601', 'Thoughts and Philosophy in Geography', 3, 3, 0, 0, 'PG', '001', 0),
+('GeES 602', 'Fundamentals of GIS & RS', 5, 5, 0, 0, 'PG', '001', 0),
+('GeES 611', 'Spatial Development theories', 3, 3, 0, 0, 'PG', '001', 0),
+('GeES 613', 'The Urban and Regional Economy', 3, 3, 0, 0, 'PG', '001', 0),
+('HIST 321', 'Africa and the Colonial Experience c. 1850-c. 1945', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 311', 'Survey of European History c. 1850-1945', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 201', 'Ethiopia and the Horn to 1500', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 211', 'The Ancient World', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 221', 'The Early History of Africa to 1500', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 251', 'Intro. To History and Historiography', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 301', 'Ethiopia and the Horn 1800-1900', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 331', 'Ethiopia and Its Neighbors 1820 to the Present', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 341', 'History of the Middle East since the 1820s', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 351', 'Introduction to Ethiopian Arts', 2, 2, 0, 0, 'UG', '002', 0),
+('HIST 361', 'Introduction to the Archaeology of Ethiopia and the Horn', 2, 2, 0, 0, 'UG', '002', 0),
+('HIST 401', 'Economic History of Ethiopia and the Horn since 1900', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 411', 'Survey of Asian History 1850-1945', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 421', 'Continuity and Change in Contemporary Africa, 1975 to the Present', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 431', 'History of Ethiopian Women', 2, 2, 0, 0, 'UG', '002', 0),
+('HIST 441', 'Diasporas of Africa in History', 2, 2, 0, 0, 'UG', '002', 0),
+('HIST 451', 'Historical Research and Writing Practice I', 3, 3, 0, 0, 'UG', '002', 0),
+('HIST 461', 'History of the Nile Basin', 2, 3, 0, 0, 'UG', '002', 0),
+('HIST 803', 'Advanced Historical Seminar II', 4, 4, 0, 0, 'PG', '002', 0),
+('HIST 611', 'Seminar on Historiography and Advanced Methodology', 4, 4, 0, 0, 'PG', '002', 0),
+('HIST 621', 'Sources, Methods and Themes in African History', 4, 4, 0, 0, 'PG', '002', 0),
+('HIST 631', 'Issues in the Historiography of Ethiopia and the Horn', 4, 4, 0, 0, 'PG', '002', 0),
+('Phil 203', 'Introduction to Philosophy', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 211', 'Pre-Socratics to', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 201', 'Introduction to Logic', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 301', 'Aristotle', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 311', 'Gender Issues and Philosophy', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 321', 'Introduction to African Philosophy', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 331', 'Moral Philosophy I', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 351', 'Philosophy of Education', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 361', 'Political Philosophy II', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 401', 'Empiricism', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 411', 'Philosophy of Science', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 421', 'Philosophical classics I', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 441', 'Senior Essay I', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 451', 'Development & Ethics', 3, 3, 0, 0, 'UG', '007', 0),
+('Phil 461', '19th Century Critics of Metaphysics', 3, 3, 0, 0, 'UG', '007', 0),
+('SOCI 201', 'Introduction to Sociology', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 211', 'Social Institution I', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 221', 'Methods of Social Research I', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 311', 'Sociological Theories I Classical Perspectives', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 321', 'Sociology of Development', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 331', 'Medical Sociology', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 341', 'Population Movements: Migration & Resettlement', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 351', 'Sociology of Tourism', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 411', 'Social Policy , Planning  & Project Administration I', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 421', 'Sociology of Deviance', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 431', 'Economic Sociology', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 441', 'Social Identities: Class, Ethnicity and Nationalism', 3, 3, 0, 0, 'UG', '004', 0),
+('SOCI 451', 'Environmental Sociology', 4, 4, 0, 0, 'UG', '004', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblFaculty`
+--
+
+CREATE TABLE IF NOT EXISTS `tblFaculty` (
+  `id` varchar(5) NOT NULL,
+  `campus_id` varchar(5) default NULL,
+  `faculty_name` varchar(100) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `campus_id` (`campus_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblFaculty`
+--
+
+INSERT INTO `tblFaculty` (`id`, `campus_id`, `faculty_name`) VALUES
+('01', '01', 'College of Social Science');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblInstructor`
+--
+
+CREATE TABLE IF NOT EXISTS `tblInstructor` (
+  `instructor_id` varchar(30) NOT NULL default '',
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `mobile_phone` varchar(40) NOT NULL,
+  `instructor_level` varchar(100) NOT NULL,
+  `service_year` int(11) default NULL,
+  `specialization` varchar(100) NOT NULL,
+  `academic_unit_id` varchar(5) default NULL,
+  `other_responsibilities` int(11) NOT NULL,
+  `sex` varchar(10) NOT NULL,
+  `status` varchar(30) NOT NULL,
+  `nationality` varchar(70) NOT NULL,
+  `educational_qualification` varchar(20) NOT NULL,
+  PRIMARY KEY  (`instructor_id`),
+  KEY `academic_unit_id` (`academic_unit_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblInstructor`
+--
+
+INSERT INTO `tblInstructor` (`instructor_id`, `first_name`, `last_name`, `email`, `mobile_phone`, `instructor_level`, `service_year`, `specialization`, `academic_unit_id`, `other_responsibilities`, `sex`, `status`, `nationality`, `educational_qualification`) VALUES
+('2345', 'Selamawit', 'Alebachew', 'selamawit@yahoo.com', '0911324323', 'Doctor', 8, 'Cultural Geography', '001', 6, 'Female', 'FT', 'Ethiopian', 'Phd'),
+('1234', 'Abebe', 'Kebede', 'abebe@yahoo.com', '0911334455', 'Lecturer', 5, 'Spacial Geography', '001', 12, 'Male', 'FT', 'Ethiopian', 'MA'),
+('3456', 'Ambaw', 'Zerihun', 'ambaw@yahoo.com', '0911545678', 'Assistant Lecturer', 2, 'Geography', '001', 12, 'Male', 'FT', 'Ethiopian', 'BA'),
+('4321', 'Abebaw', 'Melkamu', 'abebaw@yahoo.com', '0911876543', 'Lecturer', 9, 'Modern History', '002', 10, 'Male', 'FT', 'Ethiopian', 'MA'),
+('8765', 'Abrham', 'Tameru', 'abrham@yahoo.com', '0913879876', 'Assistant Lecturer', 2, 'African History', '002', 12, 'Male', 'FT', 'Ethiopian', 'BA'),
+('9898', 'Daniel', 'Getachew', 'daniel@yahoo.com', '0911223399', 'Lecturer', 5, 'PR Specialiest', '003', 7, 'Male', 'FT', 'Ethiopian', 'MA'),
+('87867', 'Mesfin', 'Alemu', 'mesfin@yahoo.com', '0911654345', 'Doctor', 12, 'International Relation Expert', '003', 6, 'Male', 'FT', 'Ethiopian', 'Phd'),
+('00998', 'Solomon', 'Teferra', 'solomon@yahoo.com', '0911587356', 'Doctor', 12, 'Contemporary Philosophy', '007', 6, 'Male', 'FT', 'Ethiopian', 'Phd'),
+('11234', 'Eyob', 'Tesema', 'eyob@yahoo.com', '0911876345', 'Lecturer', 5, 'Structural Sociology', '004', 9, 'Male', 'FT', 'Ethiopian', 'MA'),
+('87678', 'Selam', 'Esayas', 'selam@yahoo.com', '0912342232', 'Assistant Lecturer', 3, 'Sociology', '004', 12, 'Female', 'FT', 'Ethiopian', 'BA');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblInstructorLoad`
+--
+
+CREATE TABLE IF NOT EXISTS `tblInstructorLoad` (
+  `instructor_id` varchar(30) NOT NULL,
+  `course_number` varchar(100) NOT NULL,
+  `number_of_sections` int(11) NOT NULL,
+  `number_of_students_per_section` int(11) NOT NULL,
+  `number_of_students` int(11) NOT NULL,
+  `type` varchar(30) NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `semister` varchar(15) NOT NULL,
+  `year` varchar(15) NOT NULL,
+  PRIMARY KEY  (`instructor_id`,`course_number`,`type`),
+  KEY `course_number` (`course_number`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblInstructorLoad`
+--
+
+INSERT INTO `tblInstructorLoad` (`instructor_id`, `course_number`, `number_of_sections`, `number_of_students_per_section`, `number_of_students`, `type`, `category`, `semister`, `year`) VALUES
+('88888', 'GeES 251', 2, 34, 68, 'Lecture', 'UG', 'I', '2010/11'),
+('2345', 'GeES 251', 2, 20, 40, 'Lecture', 'UG', 'I', '2010/11'),
+('2345', 'GeES 613', 3, 18, 36, 'Lecture', 'PG', 'I', '2010/11'),
+('1234', 'GeES 281', 3, 20, 60, 'Lecture', 'UG', 'I', '2010/11'),
+('4321', 'HIST 411', 2, 35, 70, 'Lecture', 'UG', 'I', '2010/11'),
+('4321', 'HIST 461', 1, 40, 40, 'Lecture', 'UG', 'I', '2010/11'),
+('8765', 'HIST 201', 1, 45, 45, 'Lecture', 'UG', 'I', '2010/11'),
+('1234', 'GeES 451', 1, 32, 32, 'Lecture', 'UG', 'I', '2010/11'),
+('00998', 'Phil 411', 2, 12, 24, 'Lecture', 'UG', 'I', '2010/11'),
+('45670', 'Phil 211', 1, 23, 23, 'Lecture', 'UG', 'I', '2010/11'),
+('PT/Phi/15', 'Phil 421', 2, 10, 20, 'Lecture', 'UG', 'I', '2010/11'),
+('45670', 'Phil 301', 3, 0, 65, 'Lecture', 'UG', 'I', '2010/11'),
+('45670', 'Phil 311', 1, 0, 43, 'Lecture', 'UG', 'I', '2010/11'),
+('PT/Phi/15', 'Phil 441', 0, 0, 6, 'Project Advising', 'UG', 'I', '2010/11'),
+('00998', 'Phil 441', 0, 0, 3, 'Project Advising', 'UG', 'I', '2010/11'),
+('76767', 'GeES 441', 2, 20, 40, 'Lecture', 'UG', 'I', '2010/11'),
+('11234', 'SOCI 351', 2, 23, 46, 'Lecture', 'UG', 'I', '2010/11'),
+('87678', 'SOCI 211', 3, 30, 90, 'Lecture', 'UG', 'I', '2010/11'),
+('PT/Soc/17', 'SOCI 441', 1, 30, 30, 'Lecture', 'UG', 'I', '2010/11'),
+('PT/His/18', 'HIST 321', 3, 20, 60, 'Lecture', 'UG', 'I', '2010/11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblParttimer`
+--
+
+CREATE TABLE IF NOT EXISTS `tblParttimer` (
+  `id` int(11) NOT NULL auto_increment,
+  `parttimer_id` varchar(30) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `mobile_phone` varchar(40) NOT NULL,
+  `instructor_level` varchar(100) NOT NULL,
+  `specialization` varchar(20) NOT NULL,
+  `organization` varchar(150) NOT NULL,
+  `academic_unit_id` varchar(5) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+
+--
+-- Dumping data for table `tblParttimer`
+--
+
+INSERT INTO `tblParttimer` (`id`, `parttimer_id`, `first_name`, `last_name`, `email`, `mobile_phone`, `instructor_level`, `specialization`, `organization`, `academic_unit_id`) VALUES
+(14, '45670', 'Philo Parttimer', 'Last name', 'phip@yahoo.com', '9898898', 'Lecturer', 'Meta Phiysics', 'AAU', '007'),
+(15, 'PT/Phi/15', 'phil15', 'last name', 'phi15@yahoo.com', '089809', 'Doctor', 'plato', 'Ministry of thinkers', '007'),
+(16, '76767', 'Tesfahun', 'Sileshi', 'tesfa@yahoo.com', '0980989', 'Lecturer', 'GIS', 'AAU', '001'),
+(17, 'PT/Soc/17', 'Kebede', 'Argaw', 'kebede@yahoo.cm', '0911223344', 'Doctor', 'Advising', 'Ethiopian Society Association', '004'),
+(18, 'PT/His/18', 'Aster', 'Regassa', 'ast@yahoo.com', '0912345678', 'Lecturer', 'African History', 'MOE', '002');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblRateLookUp`
+--
+
+CREATE TABLE IF NOT EXISTS `tblRateLookUp` (
+  `category` varchar(10) NOT NULL default '',
+  `delivery_type` varchar(50) NOT NULL default '',
+  `rate` float default NULL,
+  PRIMARY KEY  (`category`,`delivery_type`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblRateLookUp`
+--
+
+INSERT INTO `tblRateLookUp` (`category`, `delivery_type`, `rate`) VALUES
+('PG', 'Lecture', 1.5),
+('UG', 'Lecture', 1),
+('UG', 'Project Advising', 0.4),
+('PG', 'Thesis', 1.5),
+('UG', 'Lab', 0.67),
+('UG', 'Tutorial', 0.67),
+('PG', 'Lab', 0.67),
+('PG', 'Tutorial', 0.67),
+('PhD', 'Lecture', 1.5),
+('PG', 'Project Advising', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblSemester`
+--
+
+CREATE TABLE IF NOT EXISTS `tblSemester` (
+  `semester` varchar(10) NOT NULL,
+  `academic_year` varchar(15) NOT NULL,
+  PRIMARY KEY  (`semester`,`academic_year`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblSemester`
+--
+
+INSERT INTO `tblSemester` (`semester`, `academic_year`) VALUES
+('I', '2010/2011');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblSemesterLoadSummery`
+--
+
+CREATE TABLE IF NOT EXISTS `tblSemesterLoadSummery` (
+  `id` int(11) NOT NULL auto_increment,
+  `inst_id` varchar(15) default NULL,
+  `semester` varchar(70) default NULL,
+  `year` varchar(15) default NULL,
+  `full_name` varchar(70) default NULL,
+  `academic_unit_id` varchar(5) default NULL,
+  `normal_course_load` float default NULL,
+  `additional_responsibility_weaver` int(11) default NULL,
+  `expected_semester_load` float default NULL,
+  `undergrad_course_load` float default NULL,
+  `post_grad_course_load` float default NULL,
+  `undergrad_advising_load` float default NULL,
+  `post_grad_project_advising_load` float default NULL,
+  `thesis_advising_load` float default NULL,
+  `total_advising_load` float default NULL,
+  `total_semester_load` float default NULL,
+  `semester_excess_load` float default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `academic_unit_id` (`academic_unit_id`),
+  KEY `additional_responsibility_weaver` (`additional_responsibility_weaver`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=145 ;
+
+--
+-- Dumping data for table `tblSemesterLoadSummery`
+--
+
+INSERT INTO `tblSemesterLoadSummery` (`id`, `inst_id`, `semester`, `year`, `full_name`, `academic_unit_id`, `normal_course_load`, `additional_responsibility_weaver`, `expected_semester_load`, `undergrad_course_load`, `post_grad_course_load`, `undergrad_advising_load`, `post_grad_project_advising_load`, `thesis_advising_load`, `total_advising_load`, `total_semester_load`, `semester_excess_load`) VALUES
+(137, '76767', 'I', '2010/2011', 'Tesfahun Sileshi', '001', 12, 0, 12, 6, 0, 0, 0, 0, 0, 6, -6),
+(136, '1234', 'I', '2010/2011', 'Abebe Kebede', '001', 12, 0, 12, 12, 0, 0, 0, 0, 0, 12, 0),
+(135, '1234', 'I', '2010/2011', 'Abebe Kebede', '001', 12, 0, 12, 12, 0, 0, 0, 0, 0, 12, 0),
+(143, '8765', 'I', '2010/2011', 'Abrham Tameru', '002', 12, 0, 12, 3, 0, 0, 0, 0, 0, 3, -9),
+(142, '4321', 'I', '2010/2011', 'Abebaw Melkamu', '002', 12, 3, 9, 9, 0, 0, 0, 0, 0, 9, 0),
+(141, '4321', 'I', '2010/2011', 'Abebaw Melkamu', '002', 12, 3, 9, 9, 0, 0, 0, 0, 0, 9, 0),
+(133, '2345', 'I', '2010/2011', 'Selamawit Alebachew', '001', 12, 6, 6, 6, 13.5, 0, 0, 0, 0, 19.5, 13.5),
+(121, 'PT/Phi/15', 'I', '2010/2011', 'phil15 last name', '007', 12, 0, 12, 6, 0, 2.4, 0, 0, 2.4, 8.4, -3.6),
+(120, 'PT/Phi/15', 'I', '2010/2011', 'phil15 last name', '007', 12, 0, 12, 6, 0, 2.4, 0, 0, 2.4, 8.4, -3.6),
+(119, '45670', 'I', '2010/2011', 'Philo Parttimer Last name', '007', 12, 0, 12, 15, 0, 0, 0, 0, 0, 15, 3),
+(118, '45670', 'I', '2010/2011', 'Philo Parttimer Last name', '007', 12, 0, 12, 15, 0, 0, 0, 0, 0, 15, 3),
+(115, '00998', 'I', '2010/2011', 'Solomon Teferra', '007', 12, 6, 6, 6, 0, 1.2, 0, 0, 1.2, 7.2, 1.2),
+(117, '45670', 'I', '2010/2011', 'Philo Parttimer Last name', '007', 12, 0, 12, 15, 0, 0, 0, 0, 0, 15, 3),
+(116, '00998', 'I', '2010/2011', 'Solomon Teferra', '007', 12, 6, 6, 6, 0, 1.2, 0, 0, 1.2, 7.2, 1.2),
+(134, '2345', 'I', '2010/2011', 'Selamawit Alebachew', '001', 12, 6, 6, 6, 13.5, 0, 0, 0, 0, 19.5, 13.5),
+(131, '87678', 'I', '2010/2011', 'Selam Esayas', '004', 12, 0, 12, 9, 0, 0, 0, 0, 0, 9, -3),
+(130, '11234', 'I', '2010/2011', 'Eyob Tesema', '004', 12, 3, 9, 6, 0, 0, 0, 0, 0, 6, -3),
+(132, 'PT/Soc/17', 'I', '2010/2011', 'Kebede Argaw', '004', 12, 0, 12, 3, 0, 0, 0, 0, 0, 3, -9),
+(144, 'PT/His/18', 'I', '2010/2011', 'Aster Regassa', '002', 12, 0, 12, 9, 0, 0, 0, 0, 0, 9, -3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblUser`
+--
+
+CREATE TABLE IF NOT EXISTS `tblUser` (
+  `instructor_id` varchar(30) NOT NULL default '',
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `mobile_phone` varchar(40) NOT NULL,
+  `academic_unit_id` varchar(5) default NULL,
+  `administrative_position` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `pass_word` varchar(150) NOT NULL,
+  PRIMARY KEY  (`instructor_id`),
+  KEY `academic_unit_id` (`academic_unit_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblUser`
+--
+
+INSERT INTO `tblUser` (`instructor_id`, `first_name`, `last_name`, `email`, `mobile_phone`, `academic_unit_id`, `administrative_position`, `username`, `pass_word`) VALUES
+('87786', 'Hailu', 'Senbeta', 'sosa@yahoo.com', '0911887799', '004', 8, 'sosa', '6648ede70727581930e0e2a0580408f5'),
+('88552', 'Tesfaye', 'Gobena', 'phil@yahoo.com', '0911889977', '007', 8, 'phil', 'd14ffd41334ec4b4b3f2c0d55c38be6f'),
+('1111', 'Geography', 'Unit', 'geo@yahoo.com', '0911223344', '001', 7, 'geo', 'ecc174e3e02c82f34c14fe860bf47ef2'),
+('66666', 'History', 'Unit', 'hist@yahoo.com', '0911887766', '002', 7, 'hist', '16e197121c1752d4f42e8999863104ce');
+
+CREATE TABLE tblCollegeUser
+(
+  `instructor_id` varchar(30) NOT NULL default '',
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `mobile_phone` varchar(40) NOT NULL,
+  `faculty_id` varchar(5) default NULL,
+  `administrative_position` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `pass_word` varchar(150) NOT NULL,
+  PRIMARY KEY  (`instructor_id`),
+  KEY `faculty_id` REFERENCES tblFaculty(`id`)
+)ENGINE=MyISAM DEFAULT CHARSET=latin1;
+

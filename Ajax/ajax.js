@@ -1,0 +1,552 @@
+function saveCompletedLoadInformation(academicUnitId,academicYear,semester){
+	if(window.confirm("Once you save this information, you will not be able to modify the load information, Are you sure you want to submit your academic unit's load information?")){					
+					if (window.XMLHttpRequest)
+					  {// code for IE7+, Firefox, Chrome, Opera, Safari
+						  xmlhttp=new XMLHttpRequest();
+					  }
+					else
+					  {// code for IE6, IE5
+						  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					  }
+					xmlhttp.onreadystatechange=function()
+					  {
+						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						    {
+							    document.getElementById("completedLoadInfoDiv").innerHTML=xmlhttp.responseText;
+						    }
+					  }
+					xmlhttp.open("GET","savecompletedloadinformation.php?academicUnitId="+academicUnitId+
+					"&academicYear="+academicYear+"&semester="+semester,true);
+					xmlhttp.send();	
+		}
+}
+
+function showListOfAcademicUnitsWhoCompletedLoadInformation(){
+	if (window.XMLHttpRequest)
+					  {// code for IE7+, Firefox, Chrome, Opera, Safari
+						  xmlhttp=new XMLHttpRequest();
+					  }
+					else
+					  {// code for IE6, IE5
+						  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					  }
+					xmlhttp.onreadystatechange=function()
+					  {
+						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						    {
+							    document.getElementById("loadInfoDiv").innerHTML=xmlhttp.responseText;
+						    }
+					  }
+					xmlhttp.open("GET","ShowListOfAcademicUnitsWhoCompletedLoadInformation.php",true);
+					xmlhttp.send();	
+}
+
+function showListOfAcademicUnitsWhoCompletedLoadInformationForEdit(){
+					if (window.XMLHttpRequest)
+					  {// code for IE7+, Firefox, Chrome, Opera, Safari
+						  xmlhttp=new XMLHttpRequest();
+					  }
+					else
+					  {// code for IE6, IE5
+						  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					  }
+					xmlhttp.onreadystatechange=function()
+					  {
+						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						    {
+							    document.getElementById("loadInfoDiv").innerHTML=xmlhttp.responseText;
+						    }
+					  }
+					xmlhttp.open("GET","ShowListOfAcademicUnitsWhoCompletedLoadInformationForEdit.php",true);
+					xmlhttp.send();	
+}
+
+function removeThisCompletedInformation(loadInformationId){
+		if(window.confirm("Are you sure you want to remove this information from the database?")){
+					if (window.XMLHttpRequest)
+					  {// code for IE7+, Firefox, Chrome, Opera, Safari
+						  xmlhttp=new XMLHttpRequest();
+					  }
+					else
+					  {// code for IE6, IE5
+						  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					  }
+					xmlhttp.onreadystatechange=function()
+					  {
+						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						    {
+							    document.getElementById("loadInfoDiv").innerHTML=xmlhttp.responseText;
+						    }
+					  }
+					xmlhttp.open("GET","RemoveThisCompletedInformation.php?loadInformationId="+loadInformationId,true);
+					xmlhttp.send();	
+			}
+}
+
+function showAccountsInThisAcademicUnit(academicUnitId){
+					//alert(academicUnitId);
+					if (window.XMLHttpRequest)
+					  {// code for IE7+, Firefox, Chrome, Opera, Safari
+						  xmlhttp=new XMLHttpRequest();
+					  }
+					else
+					  {// code for IE6, IE5
+						  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					  }
+					xmlhttp.onreadystatechange=function()
+					  {
+						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						    {
+							    document.getElementById("resetAccountDiv").innerHTML=xmlhttp.responseText;
+						    }
+					  }
+					xmlhttp.open("GET","ShowAccountsInThisAcademicUnit.php?academicUnitId="+academicUnitId,true);
+					xmlhttp.send();	
+}
+
+function showEditFieldsOfUser(instructorId){
+					if (window.XMLHttpRequest)
+					  {// code for IE7+, Firefox, Chrome, Opera, Safari
+						  xmlhttp=new XMLHttpRequest();
+					  }
+					else
+					  {// code for IE6, IE5
+						  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					  }
+					xmlhttp.onreadystatechange=function()
+					  {
+						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						    {
+							    document.getElementById("editAccountsDiv").innerHTML=xmlhttp.responseText;
+						    }
+					  }
+					xmlhttp.open("GET","ShowEditFieldsOfUser.php?instructorId="+instructorId,true);
+					xmlhttp.send();	
+}
+
+function resetThisAccount(instId,username,newPassword,confirmPassword){
+	 if(username == ""){
+	 	 document.getElementById("txtusername").style.borderColor = "red";
+	 	 document.getElementById("txtusername").focus();
+	 	 return false;
+	 }
+	 else if(newPassword == ""){
+	 	document.getElementById("txtnewpassword").style.borderColor = "red";
+	 	document.getElementById("txtnewpassword").focus();
+	 	return false;
+	 }
+	 else if(confirmPassword == ""){
+	 	document.getElementById("txtnewpassword").style.borderColor = "lightblue";
+	 	document.getElementById("txtconfirmpassword").style.borderColor = "red";
+	 	document.getElementById("txtconfirmpassword").focus();
+	 	return false;
+	 }
+	 else if(newPassword != confirmPassword){
+	 	document.getElementById("errorDiv").innerHTML = "<font color='red'>New password and Confirmation password are not identical!</font>";
+	 	document.getElementById("txtnewpassword").style.borderColor = "red";
+	 	document.getElementById("txtconfirmpassword").style.borderColor = "red";
+	 	document.getElementById("txtnewpassword").focus();
+	 	return false;
+	 }else{
+	 		if(window.confirm("Are you sure you want to reset this account?")){
+	 				if (window.XMLHttpRequest)
+					  {// code for IE7+, Firefox, Chrome, Opera, Safari
+						  xmlhttp=new XMLHttpRequest();
+					  }
+					else
+					  {// code for IE6, IE5
+						  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					  }
+					xmlhttp.onreadystatechange=function()
+					  {
+						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						    {
+							    document.getElementById("accountsInThisAcademicUnitDiv").innerHTML = xmlhttp.responseText;
+						    }
+					  }
+					xmlhttp.open("GET","ResetThisAccount.php?instId="+instId+"&username="+username+
+					"&newPassword="+newPassword,true);
+					xmlhttp.send();	
+			 }
+	 }
+}
+
+function showCollegeUserEditFields(instructorId){
+	    if (window.XMLHttpRequest)
+					  {// code for IE7+, Firefox, Chrome, Opera, Safari
+						  xmlhttp=new XMLHttpRequest();
+					  }
+					else
+					  {// code for IE6, IE5
+						  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					  }
+					xmlhttp.onreadystatechange=function()
+					  {
+						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						    {
+							    document.getElementById("collegeUserEditDiv").innerHTML = xmlhttp.responseText;
+						    }
+					  }
+					xmlhttp.open("GET","ShowCollegeUserEditFields.php?instructorId="+instructorId,true);
+					xmlhttp.send();	    			
+}
+
+function showAdminEditFields(id){
+	if (window.XMLHttpRequest)
+					  {// code for IE7+, Firefox, Chrome, Opera, Safari
+						  xmlhttp=new XMLHttpRequest();
+					  }
+					else
+					  {// code for IE6, IE5
+						  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					  }
+					xmlhttp.onreadystatechange=function()
+					  {
+						  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						    {
+							    document.getElementById("adminEditDiv").innerHTML = xmlhttp.responseText;
+						    }
+					  }
+					xmlhttp.open("GET","ShowAdminEditFields.php?id="+id,true);
+					xmlhttp.send();	    
+}
+
+function changeFaculty(facultyId){
+	document.getElementById('hiddenfacultyid').value = facultyId;
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    document.getElementById("txtfaculty").value = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","ChangeFaculty.php?facultyId="+facultyId,true);
+		xmlhttp.send();	    	
+}
+
+function changeAdminPosition(adminPositionId){
+		document.getElementById('hiddenadminpositionid').value = adminPositionId;
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    document.getElementById("txtadminposition").value = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","ChangeAdminPosition.php?adminPositionId="+adminPositionId,true);
+		xmlhttp.send();	    	
+}
+
+function updateCollegeUser(instructorId,firstName,lastName,email,mobilePhone,facultyId,
+adminPositionId){
+		//alert(instructorId+":"+firstName+":"+lastName+":"+email+":"+mobilePhone+":"+facultyId+":"+adminPositionId);
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    document.getElementById("collegeUserEditDiv").innerHTML = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","UpdateCollegeUser.php?instructorId="+instructorId+"&firstName="+
+		firstName+"&lastName="+lastName+"&email="+email+"&mobilePhone="+mobilePhone+
+		"&facultyId="+facultyId+"&adminPositionId="+adminPositionId,true);
+		xmlhttp.send();	
+}
+
+function updateAdmin(id,firstName,lastName,email){
+	if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    document.getElementById("adminEditDiv").innerHTML = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","UpdateAdmin.php?id="+id+"&firstName="+
+		firstName+"&lastName="+lastName+"&email="+email,true);
+		xmlhttp.send();	
+}
+
+function deleteThisCollegeUser(instructorId){
+	//alert(instructorId);
+	if(window.confirm("Are you sure you want to delete this college user?")){
+			if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    document.getElementById("collegeUserEditDiv").innerHTML = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","DeleteThisCollegeUser.php?instructorId="+instructorId,true);
+		xmlhttp.send();	
+	}
+}
+
+function deleteThisAdministrator(id){
+	if(window.confirm("Are you sure you want to delete this administrator?")){
+			if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    document.getElementById("adminEditDiv").innerHTML = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","DeleteThisAdministrator.php?id="+id,true);
+		xmlhttp.send();	
+	}
+}
+
+function showEditFieldsOfCommitmentRateLookup(id){
+	if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    document.getElementById("editCommitmentRateLookupDiv").innerHTML = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","ShowEditFieldsOfCommitmentRateLookup.php?id="+id,true);
+		xmlhttp.send();	
+}
+
+function updateTeachingCommitmentRateLookup(id,percentage,expectedHour){
+	if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    document.getElementById("editCommitmentRateLookupDiv").innerHTML = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","UpdateTeachingCommitmentRateLookup.php?id="+id+
+		"&percentage="+percentage+"&expectedHour="+expectedHour,true);
+		xmlhttp.send();	
+}
+
+function deleteThisTeachingCommitmentRateLookup(id){
+	if(window.confirm("Are you sure you want to delete this teaching commitment rate lookup field?")){
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    //document.getElementById("editCommitmentRateLookupDiv").innerHTML = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","DeleteThisTeachingCommitmentRateLookup.php?id="+id,true);
+		xmlhttp.send();	
+	}
+}
+
+function changeExpectedTeachingCommitmentRateValue(id){
+	 document.getElementById('hiddenexpectedteachingcommitment').value = id;
+	 if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    document.getElementById("txtexpectedteachingcommitment").value = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","ChangeExpectedTeachingCommitmentRateValue.php?id="+id,true);
+		xmlhttp.send();	 
+}
+
+function showSearchInstructorBy(fieldName){
+	if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    document.getElementById("searchParameterDiv").innerHTML = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","ShowSearchInstructorBy.php?fieldName="+fieldName,true);
+		xmlhttp.send();	 
+}
+
+function showSearchCourseBy(fieldName){
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    document.getElementById("searchParameterDiv").innerHTML = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","ShowSearchCourseBy.php?fieldName="+fieldName,true);
+		xmlhttp.send();
+}
+
+function searchInstructorById(instructorId){
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    document.getElementById("searchResultDiv").innerHTML = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","ShowSearchResultForInstructorById.php?instructorId="+instructorId,true);
+		xmlhttp.send();
+}
+
+function searchCourseByCourseNumber(courseNumber){
+	if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    document.getElementById("searchResultDiv").innerHTML = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","ShowSearchResultForCourseByCourseNumber.php?courseNumber="+courseNumber,true);
+		xmlhttp.send();
+}
+
+function searchCourseByCourseTitle(courseTitle){
+	if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    document.getElementById("searchResultDiv").innerHTML = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","ShowSearchResultForCourseByCourseTitle.php?courseTitle="+courseTitle,true);
+		xmlhttp.send();
+}
+
+function searchInstructorByName(firstName,lastName){
+	if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+			  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+			  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			    {
+				    document.getElementById("searchResultDiv").innerHTML = xmlhttp.responseText;
+			    }
+		  }
+		xmlhttp.open("GET","ShowSearchResultForInstructorByName.php?firstName="+firstName+"&lastName="+lastName,true);
+		xmlhttp.send();
+}
+
+function showLoadReportForThisInstructor(instructorId){
+	alert(instructorId);
+}

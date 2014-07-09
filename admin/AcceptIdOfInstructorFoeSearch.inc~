@@ -1,0 +1,7 @@
+<table border="1" width="80%">
+	<tr>
+		<td>Enter the Id number of the instructor</td>
+		<td><input type="text" name="txtinstructorid" id="txtinstructorid"/></td>
+		<td><input type="button" value="Search"/></td>
+	</tr>
+</table>

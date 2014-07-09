@@ -1,0 +1,9 @@
+--Academic Staff Load Version 1.0 features--
+1. Excess Load separation
+2. Deletion confirmation
+3. Retrospective Reporting for the administator
+4. Hose keeping for the administrator
+
+--Database tables added--
+1. tblInstructorLoadRepository
+2. tblSemesterLoadSummery

@@ -1,0 +1,49 @@
+--Academic Staff Load Version 1.0 features--
+1. Excess Load separation
+2. Deletion confirmation
+3. Retrospective Reporting for the administator
+4. Hose keeping for the administrator
+
+--Database tables added--
+1. tblInstructorLoadRepository
+2. tblSemesterLoadSummery
+
+-- Please add the following tables into the database--
+CREATE TABLE tblInstructorLoadRepository
+(
+	instructor_id VARCHAR(30),
+	course_number VARCHAR(100),
+	number_of_sections FLOAT,
+	number_of_students_per_section INT,
+	number_of_students INT,
+	type VARCHAR(30),
+	category VARCHAR(100),
+	semister VARCHAR(15),
+	year VARCHAR(15),
+	academic_unit_id VARCHAR(5),
+	PRIMARY KEY(instructor_id,course_number,type,category,semister,year),
+	FOREIGN KEY(instructor_id) REFERENCES tblInstructor(instructor_id),
+	FOREIGN KEY(course_number) REFERENCES tblCourse(course_number)	
+);
+
+CREATE TABLE tblLoadSummaryRepository
+(	
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	inst_id VARCHAR(15),
+	semester VARCHAR(70),
+	year VARCHAR(15),
+	full_name VARCHAR(70),
+	academic_unit_id VARCHAR(5),
+	normal_course_load FLOAT,
+	additional_responsibility_weaver INT,
+	expected_semester_load FLOAT,
+	undergrad_course_load FLOAT,
+	post_grad_course_load FLOAT,
+	undergrad_advising_load FLOAT,
+	post_grad_project_advising FLOAT,
+	thesis_advising_load FLOAT,
+	total_advising_load FLOAT,
+	total_semester_load FLOAT,
+	semester_excess_load FLOAT	
+);
+

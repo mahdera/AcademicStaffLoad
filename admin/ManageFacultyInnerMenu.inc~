@@ -1,0 +1,22 @@
+
+<div align="left" style="background:#CCCCCC">                    
+  		<table>
+  			<tr>
+  				<td align="center">
+		  			<a href="AddFaculty.php"><img src="images/new.png" align="absmiddle"> <font size="1">Add Faculty</font></a>
+		  		</td>
+		  		<td align="center">
+		  			<a href="ViewFaculty.php"><img src="images/view.png" align="absmiddle"> <font size="1">View Faculty</font></a>
+		  		</td>
+		  		<td align="center">
+		  			<a href="EditFaculty.php"><img src="images/edit.gif" align="absmiddle"> <font size="1">Edit Faculty</font></a>
+		  		</td>
+		  		<td align="center">
+		  			<a href="DeleteFaculty.php"><img src="images/ImgDelete.gif" align="absmiddle"> <font size="1">Delete Faculty</font></a>
+		  		</td>
+		  		<td align="center">  		
+		  			<a href="LogOff.php"><img src="images/logout.gif" align="absmiddle"> <font size="1">Logout</font></a>
+		  		</td>
+		  	</tr>
+  		</table>         
+</div>

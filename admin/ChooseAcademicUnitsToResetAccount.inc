@@ -1,0 +1,25 @@
+<div>
+	<?php
+		include('../classes/User.php');
+		include('../classes/AcademicUnit.php');
+		print("<table border='0' width='80%'>");
+			print("<tr>");
+				print("<td width='50%'>");
+					//now get all list of academic units from the database
+					$academicUnits = AcademicUnit::getAllAcademicUnits();
+					print("<select name='slctacademicunit' id='slctacademicunit'>");
+					print("<option value='' selected='selected'>--Select--</option>");
+					while($academicUnitsRow = mysql_fetch_object($academicUnits)){
+						print("<option value='$academicUnitsRow->id'>$academicUnitsRow->academic_unit_name</option>");
+					}
+					print("</select>");
+				print("</td>");
+				print("<td>");
+				?>
+					<input type="button" value="Show Account Information" class="button" onclick="showAccountsInThisAcademicUnit(document.getElementById('slctacademicunit').value);"/>
+				<?php
+				print("</td>");
+			print("</tr>");
+		print("</table>");
+	?>
+</div>
