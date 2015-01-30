@@ -9,16 +9,16 @@
         		function isBlank()
         		{
         			if(document.getElementById("txtcampusname").value=="")
-        			{        				
+        			{
         				document.getElementById("errorMsg").innerHTML = "Enter the name of the campus!";
         				document.getElementById("txtcampusname").focus();
-        				document.getElementById("txtcampusname").style.borderColor="red";        				
+        				document.getElementById("txtcampusname").style.borderColor="red";
         				return false;
         			}
         			else
         				return true;
         		}
-        		
+
         	  function checkAndChangeColor(str,id)
            {
            		if(str != "")
@@ -30,7 +30,7 @@
         </script>
     </head>
     <body>
-<?php   
+<?php
     @session_start();
     $sessName = $_SESSION['admin_name'];
     //check if the session variable is set
@@ -41,16 +41,16 @@
  				<?php
         			require('../IndexHeader.inc');
         		?>
-        		
+
             <?php
             	include('AdminSidebar.inc');
-				?>            
-            
-            <div id="indexmain"> 
+				?>
+
+            <div id="indexmain">
             	<?php
             		include("ManageAdminPositionInnerMenu.inc");
-            	?>  
-            	           
+            	?>
+
 					<form name="frmaddadminposition" method="post" action="SaveAdminPosition.php" onsubmit="return isBlank();">
 						<br/><br/>
 						<caption>Add New Admin Position</caption>
@@ -62,7 +62,7 @@
 								</td>
 								<td align="left">
 									<input type="text" name="txtadminpositionname" id="txtadminpositionname" onblur="checkAndChangeColor(this.value,id);"/>
-								</td>								
+								</td>
 							</tr>
 							<tr>
 								<td align="right">
@@ -70,7 +70,7 @@
 								</td>
 								<td align="left">
 									<input type="text" name="txtequivalentcredit" id="txtequivalentcredit" onblur="checkAndChangeColor(this.value,id);"/>
-								</td>								
+								</td>
 							</tr>
 							<tr>
 								<td>
@@ -81,11 +81,11 @@
 							</tr>
 						</table>
 						<br/><br/><br/><br/><br/><br/><br/>
-					</form>			
+					</form>
             </div><!----all forms in this div-->
 
-                
-           
+
+
 <?php
     require('../Footer.inc');
 ?>
@@ -98,4 +98,3 @@
                 echo "ur session has expired";
             }
  ?>
-

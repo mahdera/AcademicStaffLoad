@@ -1,36 +1,40 @@
 <?php
-	include_once('DBConnection.php');	
-	
+	include_once('DBConnection.php');
+
 	class Semester{
 		private $semester;
 		private $academicYear;
-		
+
+		public function __construct(){
+			
+		}
+
 		public function Semester($semester,$academicYear)
 		{
 			$this->setSemester($semester);
 			$this->setAcademicYear($academicYear);
 		}
-		
+
 		public function setSemester($semester)
 		{
-			$this->semester = $semester;			
+			$this->semester = $semester;
 		}
-		
+
 		public function setAcademicYear($academicYear)
 		{
-			$this->academicYear = $academicYear;		
+			$this->academicYear = $academicYear;
 		}
-		
+
 		public function getSemester()
 		{
 			return $this->semester;
 		}
-		
+
 		public function getAcademicYear()
 		{
 			return $this->academicYear;
 		}
-		
+
 		public function addSemester()
 		{
 			try{
@@ -40,7 +44,7 @@
 				$e->__toString();
 			}
 		}
-		
+
 		public function getCurrentSemester()
 		{
 			try{
@@ -52,7 +56,7 @@
 				$e->__toString();
 			}
 		}
-		
+
 		public function deleteSemester($semester,$academicYear)
 		{
 			try{

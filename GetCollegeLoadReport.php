@@ -8,7 +8,7 @@
 	//now do the same for parttimer instructor
 	SemesterLoadSummeryCalculator::calculateSemesterLoadForPartTimerInstructor($academicUnitId);
 	//Header("Location: ShowLoadReport.php");
-	//to stick with the old reporting format....you may need to get back here in case things are not working 
+	//to stick with the old reporting format....you may need to get back here in case things are not working
 	//as planned
 	//Header("Location: ShowLoadReportFinal.php");
 
@@ -19,13 +19,13 @@
 		$query = "SELECT * FROM tblInstructor WHERE academic_unit_id = '$academicUnitId' ORDER BY first_name ASC";
 		//print($query."<br/>");
 		$resultInstructors = DBConnection::readFromDatabase($query);
-		
+
 		include_once('classes/DBConnection.php');
 	include_once('classes/InstructorLoad.php');
 	include_once('classes/SemesterLoadSummery.php');
 	include_once('classes/AcademicUnit.php');
 	include_once('classes/CourseOffering.php');
-	
+
 	//first read all instructors in this specific academic unit
 	session_start();
 	$academicUnitId = $_REQUEST['id'];
@@ -76,13 +76,13 @@
 				//print("inst $instructorId is teaching : $howMany courses<br/>");
 				//print("$instructorId is teaching $howMany courses<br/>");
 				//then comes the need to get all the info from tblSemesterLoadSummery to get the non-repeating info
-				
+
 				//$resultSemesterLoadRow = SemesterLoadSummery::getAllLoadInfoForInstructor($instructorId);
 				$query = "SELECT * FROM tblSemesterLoadSummery WHERE inst_id = '$instructorId' AND academic_unit_id = '$academicUnitId'";
 				//print("$query<br>");
 				$resultSemesterLoad = DBConnection::readFromDatabase($query);
-				$resultSemesterLoadRow = mysql_fetch_object($resultSemesterLoad);				
-				
+				$resultSemesterLoadRow = mysql_fetch_object($resultSemesterLoad);
+
 				$fullName = $resultSemesterLoadRow->full_name;
 				$normalCourseLoad = $resultSemesterLoadRow->normal_course_load;
 				$expectedSemesterLoad = $resultSemesterLoadRow->expected_semester_load;
@@ -95,10 +95,10 @@
 				$totalAdvisingLoad = $resultSemesterLoadRow->total_advising_load;
 				$totalSemesterLoad = $resultSemesterLoadRow->total_semester_load;
 				$semesterExcessLoad = $resultSemesterLoadRow->semester_excess_load;
-				
-				
+
+
 				//print("fn $fullName<br/>");passed
-				
+
 				if($ctr % 2 == 0)
 			   {
 				  print("<tr style='background:#ded7fe'>");
@@ -106,69 +106,69 @@
 				else
 				{
 				  print("<tr style='background:#ecfdfe'>");
-				}		
+				}
 					print("<td rowspan='$howMany' width='1%'>");
 						print("<font size='2'>$instructorId</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' width='2%'>");
 						print("<font size='2'>$fullName</font>");
 					print("</td>");
-					
+
 					//get the academicunitname
 					$academicUnitNameResult = AcademicUnit::getAcademicUnitNameFor($resultSemesterLoadRow->academic_unit_id);
 					$academicUnitNameResultRow = mysql_fetch_object($academicUnitNameResult);
 					$academicUnitName = $academicUnitNameResultRow->academic_unit_name;
 					//print("the academic unit name is : $academicUnitName<br/>");
-					
+
 					print("<td rowspan='$howMany' width='2%'>");
 						print("<font size='2'>$academicUnitName</font>");
 					print("</td>");
-					
+
 					/*print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$normalCourseLoad</font>");
 					print("</td>");*/
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$additionalResponsibilityWaiver</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$expectedSemesterLoad</font>");
-					print("</td>");				
+					print("</td>");
 				//print("</tr>");
-					
+
 				//now do the logic for displaying the next segment of the non-repeating fields...but calculated.
-				
+
 				//print("<tr>");
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$undergradCourseLoad</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$postgradCourseLoad</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$undergradAdvisingLoad</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$postgradProjectAdvising</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$thesisAdvisingLoad</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$totalAdvisingLoad</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'><b>$totalSemesterLoad</b></font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						//the code below is used to check if there are negatives...and avoid them totaly
 						if($semesterExcessLoad <= 0)
@@ -182,18 +182,18 @@
 						}
 					print("</td>");
 				print("</tr>");
-				
+
 				//now begin displaying the repeating fields here
-				//here i need to get all the courses this particular instructor is teaching 
-				
+				//here i need to get all the courses this particular instructor is teaching
+
 				$query = "SELECT * FROM tblInstructorLoad WHERE instructor_id = '$instructorId' AND academic_unit_id = '$academicUnitId'";
 				$resultLoad = DBConnection::readFromDatabase($query);
-				
+
 				while($resultLoadRow = mysql_fetch_object($resultLoad))
 				{
 					$courseNumber = $resultLoadRow->course_number;
 					$courseDetailRow = CourseOffering::getCourseDetail($courseNumber);
-					$creditHour = $courseDetailRow->credit_hour; 
+					$creditHour = $courseDetailRow->credit_hour;
 					$lectureHour = $courseDetailRow->lecture_hour;
 					$labHour = $courseDetailRow->lab_hour;
 					$tutorialHour = $courseDetailRow->tutorial_hour;
@@ -202,7 +202,7 @@
 					$numberOfStudents = $resultLoadRow->number_of_students;
 					$type = $resultLoadRow->type;
 					$remark = $resultLoadRow->remark;
-					
+
 					if($ctr % 2 == 0)
 				   {
 					  print("<tr style='background:#ded7fe'>");
@@ -210,7 +210,7 @@
 					else
 					{
 					  print("<tr style='background:#ecfdfe'>");
-					}		
+					}
 						print("<td align='center'><font size='2'><strong>$courseNumber</strong></font></td>");
 						print("<td align='center'><font size='2'>$creditHour</font></td>");
 						print("<td align='center'><font size='2'>$lectureHour</font></td>");
@@ -223,18 +223,18 @@
 						print("<td align='center'><font size='2'>$remark</font></td>");
 					print("</tr>");
 				}//end while...loop...this will loop thru all the courses this instructor is currently teaching
-						
-					
+
+
 			}//end if...condition
 			$ctr++;
 		}//end while...loop...this loop will iterate thru all instructor in the academic unit
 	print("</table>");
-	
+
 	//do the same for parttimer instructor below////////////////////****************--------------------63545874
 	$query = "SELECT * FROM tblParttimer WHERE academic_unit_id = '$academicUnitId'  ORDER BY first_name, last_name ASC";
 	//print($query);
 	$result = DBConnection::readFromDatabase($query);
-	
+
 	print("<table width='80%' border='1'>");
 		print("<caption style='background:lightblue'>Parttimer Instructor's Load Report</caption>");
 		print("<tr style='background: lightblue'>");
@@ -277,13 +277,13 @@
 				$howMany = $howMany + 1;
 				//print("$instructorId is teaching $howMany courses<br/>");
 				//then comes the need to get all the info from tblSemesterLoadSummery to get the non-repeating info
-				
+
 				//$resultSemesterLoadRow = SemesterLoadSummery::getAllLoadInfoForInstructor($instructorId);
 				$query = "SELECT * FROM tblSemesterLoadSummery WHERE inst_id = '$instructorId' AND academic_unit_id = '$academicUnitId'";
 				//print("$query<br>");
 				$resultSemesterLoad = DBConnection::readFromDatabase($query);
-				$resultSemesterLoadRow = mysql_fetch_object($resultSemesterLoad);				
-				
+				$resultSemesterLoadRow = mysql_fetch_object($resultSemesterLoad);
+
 				$fullName = $resultSemesterLoadRow->full_name;
 				$normalCourseLoad = $resultSemesterLoadRow->normal_course_load;
 				$expectedSemesterLoad = $resultSemesterLoadRow->expected_semester_load;
@@ -296,10 +296,10 @@
 				$totalAdvisingLoad = $resultSemesterLoadRow->total_advising_load;
 				$totalSemesterLoad = $resultSemesterLoadRow->total_semester_load;
 				$semesterExcessLoad = $resultSemesterLoadRow->semester_excess_load;
-				
-				
+
+
 				//print("fn $fullName<br/>");passed
-				
+
 				if($ctr % 2 == 0)
 			   {
 				  print("<tr style='background:#ded7fe'>");
@@ -307,68 +307,68 @@
 				else
 				{
 				  print("<tr style='background:#ecfdfe'>");
-				}		
+				}
 					print("<td rowspan='$howMany' width='1%'>");
 						print("<font size='2'>$instructorId</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' width='2%'>");
 						print("<font size='2'>$fullName</font>");
 					print("</td>");
-					
+
 					//get the academicunitname
 					$academicUnitNameResult = AcademicUnit::getAcademicUnitNameFor($resultSemesterLoadRow->academic_unit_id);
 					$academicUnitNameResultRow = mysql_fetch_object($academicUnitNameResult);
 					$academicUnitName = $academicUnitNameResultRow->academic_unit_name;
-					
+
 					print("<td rowspan='$howMany' width='2%'>");
 						print("<font size='2'>$academicUnitName</font>");
 					print("</td>");
-					
+
 					/*print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$normalCourseLoad</font>");
 					print("</td>");*/
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$additionalResponsibilityWaiver</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$expectedSemesterLoad</font>");
-					print("</td>");				
+					print("</td>");
 				//print("</tr>");
-					
+
 				//now do the logic for displaying the next segment of the non-repeating fields...but calculated.
-				
+
 				//print("<tr>");
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$undergradCourseLoad</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$postgradCourseLoad</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$undergradAdvisingLoad</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$postgradProjectAdvising</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$thesisAdvisingLoad</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'>$totalAdvisingLoad</font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						print("<font size='2'><b>$totalSemesterLoad</b></font>");
 					print("</td>");
-					
+
 					print("<td rowspan='$howMany' align='center'>");
 						//the code below is used to check if there are negatives...and avoid them totaly
 						if($semesterExcessLoad <= 0)
@@ -383,13 +383,13 @@
 						}
 					print("</td>");
 				print("</tr>");
-				
+
 				//now begin displaying the repeating fields here
-				//here i need to get all the courses this particular instructor is teaching 
-				
+				//here i need to get all the courses this particular instructor is teaching
+
 				$query = "SELECT * FROM tblInstructorLoad WHERE instructor_id = '$instructorId' AND academic_unit_id = '$academicUnitId'";
 				$resultLoad = DBConnection::readFromDatabase($query);
-				
+
 				while($resultLoadRow = mysql_fetch_object($resultLoad))
 				{
 					$courseNumber = $resultLoadRow->course_number;
@@ -403,7 +403,7 @@
 					$numberOfStudents = $resultLoadRow->number_of_students;
 					$type = $resultLoadRow->type;
 					$remark = $resultLoadRow->remark;
-					
+
 					if($ctr % 2 == 0)
 				   {
 					  print("<tr style='background:#ded7fe'>");
@@ -411,7 +411,7 @@
 					else
 					{
 					  print("<tr style='background:#ecfdfe'>");
-					}		
+					}
 						print("<td align='center'><font size='2'><strong>$courseNumber</strong></font></td>");
 						print("<td align='center'><font size='2'>$creditHour</font></td>");
 						print("<td align='center'><font size='2'>$lectureHour</font></td>");
@@ -424,8 +424,8 @@
 						print("<td align='center'><font size='2'>$remark</font></td>");
 					print("</tr>");
 				}//end while...loop...this will loop thru all the courses this instructor is currently teaching
-						
-					
+
+
 			}//end if...condition
 			$ctr++;
 		}//end while...loop...this loop will iterate thru all instructor in the academic unit
